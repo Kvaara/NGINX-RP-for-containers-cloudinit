@@ -21,8 +21,8 @@ services:
         # gitlab_rails['smtp_openssl_verify_mode'] = 'none'
         # gitlab_rails['gitlab_shell_ssh_port'] = 2222
         # gitlab_rails['gitlab_shell_ssh_host'] = 'localhost'
-        letsencrypt['enable'] = true
-        letsencrypt['contact_emails'] = ['salste.jesse@gmail.com']
+        # letsencrypt['enable'] = true
+        # letsencrypt['contact_emails'] = ['salste.jesse@gmail.com']
     ports:
       - "5000:80"
       # - "80:80"
