@@ -1,0 +1,14 @@
+#cloud-config 
+
+package_update: true 
+package_upgrade: true
+bootcmd:
+ - sysctl -w vm.max_map_count=524288
+ - sysctl -w fs.file-max=131072
+ - ulimit -n 131072 
+ - ulimit -u 8192 
+runcmd: 
+ - mkdir /run/docker_compose/ 
+ - wget "https://drive.google.com/uc?export=download&id=1UEYUB_A-sZWIJbbratEFnrSrz3TLyZIG" -O /run/docker_compose/docker-compose.yml
+ - cd /run/docker_compose/
+ - docker compose up -d
