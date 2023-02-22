@@ -8,7 +8,8 @@ bootcmd:
  - ulimit -n 131072 
  - ulimit -u 8192 
 runcmd: 
- - mkdir /run/docker_compose/ 
- - wget "https://drive.google.com/uc?export=download&id=1UEYUB_A-sZWIJbbratEFnrSrz3TLyZIG" -O /run/docker_compose/docker-compose.yml
- - cd /run/docker_compose/
+#  - mkdir /run/docker_compose/ 
+ - cd /run/
+ - git clone https://github.com/Kvaara/NGINX-RP-for-containers-cloudinit.git
+ - cd ./NGINX-RP-for-containers-cloudinit
  - docker compose up -d
