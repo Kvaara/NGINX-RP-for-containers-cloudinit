@@ -13,3 +13,10 @@ runcmd:
  - git clone https://github.com/Kvaara/NGINX-RP-for-containers-cloudinit.git
  - cd ./NGINX-RP-for-containers-cloudinit
  - docker compose up -d
+#  - apt install snapd
+ - snap install core
+ - snap refresh core
+#  - apt remove certbot
+ - snap install --classic certbot
+ - ln -s /snap/bin/certbot /usr/bin/certbot
+ - certbot --nginx --agree-tos --email jesse.karnavaara@codebased.fi -d dev.codebased.fi 
