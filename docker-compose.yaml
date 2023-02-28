@@ -79,17 +79,28 @@ services:
 
 
   nginx:
-    image: nginx
+    # image: nginx
+    image: jonasal/nginx-certbot
     container_name: nginx_lb
     depends_on:
       - jenkins
     restart: always
+    environment:
+      - CERTBOT_EMAIL=jesse.karnavaara@codebased.fi
+      - STAGING=1
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-
+      # - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/user.conf.d:ro
+      # - ./certbot/www:/var/www/certbot/:ro
+      # - ./certbot/conf/:/etc/nginx/ssl/:ro
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   volumes:
+  #     - ./certbot/www/:/var/www/certbot/:rw
+  #     - ./certbot/conf/:/etc/letsencrypt/:rw
 
 volumes:
   gitlab_config:
