@@ -93,7 +93,7 @@ services:
       - "443:443"
     volumes:
       # - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./user_conf.d:/etc/nginx/user_conf.d:ro
+      - ./user_conf.d:/etc/nginx/user_conf.d
       - nginx_secrets:/etc/letsencrypt
       # - ./certbot/www:/var/www/certbot/:ro
       # - ./certbot/conf/:/etc/nginx/ssl/:ro
