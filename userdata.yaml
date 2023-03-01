@@ -9,7 +9,7 @@ bootcmd:
  - ulimit -u 8192 
 runcmd: 
 #  - mkdir /run/docker_compose/ 
-#  - cd /run/
+ - cd /run/
  - git clone https://github.com/Kvaara/NGINX-RP-for-containers-cloudinit.git
  - cd ./NGINX-RP-for-containers-cloudinit
 #  - chmod +x init-letsencrypt.sh
