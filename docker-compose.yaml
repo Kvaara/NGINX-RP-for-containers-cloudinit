@@ -79,34 +79,34 @@ services:
 
 
   nginx:
-    image: nginx
-    # image: jonasal/nginx-certbot
+    # image: nginx
+    image: jonasal/nginx-certbot
     container_name: nginx_lb
     depends_on:
       - jenkins
     restart: always
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-    # environment:
-    #   - CERTBOT_EMAIL=jesse.karnavaara@codebased.fi
-    #   - STAGING=1
+    # command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    environment:
+      - CERTBOT_EMAIL=jesse.karnavaara@codebased.fi
+      - STAGING=1
     ports:
       - "80:80"
       - "443:443"
     volumes:
       # - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx.conf:/etc/nginx/conf.d
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-      # - ./user_conf.d:/etc/nginx/user_conf.d
-      # - nginx_secrets:/etc/letsencrypt
+      # - ./certbot/conf:/etc/letsencrypt
+      # - ./certbot/www:/var/www/certbot
+      - ./nginx.conf:/etc/nginx/user_conf.d
+      - nginx_secrets:/etc/letsencrypt
       # - ./certbot/www:/var/www/certbot/:ro
       # - ./certbot/conf/:/etc/nginx/ssl/:ro
-  certbot:
-    image: certbot/certbot:latest
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
+
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  #   volumes:
+  #     - ./certbot/www/:/var/www/certbot/:rw
+  #     - ./certbot/conf/:/etc/letsencrypt/:rw
 
 volumes:
   gitlab_config:
@@ -118,4 +118,4 @@ volumes:
   sonarqube_logs:
   postgresql:
   postgresql_data:
-  # nginx_secrets: {}
+  nginx_secrets: {}
