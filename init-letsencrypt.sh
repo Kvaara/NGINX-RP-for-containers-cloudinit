@@ -6,7 +6,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
 fi
 
 domains=(dev.codebased.fi www.dev.codebased.fi)
-rsa_key_size=4096
+rsa_key_size=2048
 data_path="./certbot"
 email="jesse.karnavaara@codebased.fi" # Adding a valid address is strongly recommended
 staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
