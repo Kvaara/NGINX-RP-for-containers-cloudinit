@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(dev.codebased.fi www.dev.codebased.fi)
+domains=(codebased.io www.codebased.io)
 rsa_key_size=2048
 data_path="./data/certbot"
 email="jesse.karnavaara@codebased.fi" # Adding a valid address is strongly recommended
