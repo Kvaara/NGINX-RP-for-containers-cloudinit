@@ -40,7 +40,7 @@ services:
     restart: always
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
-      - JENKINS_OPTS="--prefix=/jenkins" #! NEEDED FOR GETTING THE PREFIX CORRECTLY WORKING WITH NGINX REVERSE PROXY
+      # - JENKINS_OPTS="--prefix=/jenkins" # NEEDED FOR GETTING THE PREFIX CORRECTLY WORKING WITH NGINX REVERSE PROXY
     ports:
       - "8080:8080"
     volumes:
