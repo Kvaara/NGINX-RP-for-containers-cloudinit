@@ -38,6 +38,7 @@ services:
     image: jenkins/jenkins:lts
     container_name: jenkins
     restart: always
+    hostname: dev.codebased.fi
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
       - JENKINS_OPTS="--prefix=/jenkins" # NEEDED FOR GETTING THE PREFIX CORRECTLY WORKING WITH NGINX REVERSE PROXY
