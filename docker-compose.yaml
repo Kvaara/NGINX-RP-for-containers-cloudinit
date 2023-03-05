@@ -83,6 +83,7 @@ services:
     image: nginx
     # image: jonasal/nginx-certbot
     container_name: nginx_lb
+    hostname: dev.codebased.fi
     depends_on:
       - jenkins
     restart: always
