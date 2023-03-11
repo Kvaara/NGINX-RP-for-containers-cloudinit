@@ -14,7 +14,7 @@ runcmd:
  - cd ./NGINX-RP-for-containers-cloudinit
  - chmod +x init-letsencrypt.sh
  - ./init-letsencrypt.sh
- - docker compose up -d
+ - docker compose up -d dev.codebased.fi
 #  - apt install snapd  
 #  - snap install core
 #  - snap refresh core
