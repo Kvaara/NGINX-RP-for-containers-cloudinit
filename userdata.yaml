@@ -8,18 +8,9 @@ bootcmd:
  - ulimit -n 131072 
  - ulimit -u 8192 
 runcmd: 
-#  - mkdir /run/docker_compose/ 
  - cd /run/
  - git clone https://github.com/Kvaara/NGINX-RP-for-containers-cloudinit.git
  - cd ./NGINX-RP-for-containers-cloudinit
  - chmod +x init-letsencrypt.sh
- - [ bash, ./init-letsencrypt.sh ]
-#  - ./init-letsencrypt.sh
+ - [ bash, ./init-letsencrypt.sh ] # ./init-letsencrypt.sh (DOES NOT WORK BECAUSE OF NO PRIVILEGES? DUNNO WHY)
  - docker compose up
-#  - apt install snapd
-#  - snap install core
-#  - snap refresh core
-#  - apt remove certbot
-#  - snap install --classic certbot
-#  - ln -s /snap/bin/certbot /usr/bin/certbot
-#  - certbot --nginx --agree-tos --email jesse.karnavaara@codebased.fi -d dev.codebased.fi 
