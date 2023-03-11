@@ -41,7 +41,7 @@ services:
     # hostname: dev.codebased.fi
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
-      - JENKINS_OPTS="--httpPort=-1 --httpsPort=8443 --httpsCertificate=/etc/letsencrypt/live/dev.codebased.fi/fullchain.pem --httpsPrivateKey=/etc/letsencrypt/live/dev.codebased.fi/privkey.pem"
+      - JENKINS_OPTS="--httpPort=-1 --httpsPort=8443" #--httpsCertificate=/etc/letsencrypt/live/dev.codebased.fi/fullchain.pem --httpsPrivateKey=/etc/letsencrypt/live/dev.codebased.fi/privkey.pem"
       # - JENKINS_OPTS="--prefix=/jenkins" # NEEDED FOR GETTING THE PREFIX CORRECTLY WORKING WITH NGINX REVERSE PROXY
     ports:
       - "8443:8443"
