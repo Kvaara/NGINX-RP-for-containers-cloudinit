@@ -72,6 +72,7 @@ docker compose run --rm --entrypoint "\
     $email_arg \
     $domain_args \
     --rsa-key-size $rsa_key_size \
+    --no-eff-email \
     --agree-tos \
     --force-renewal" certbot
 echo
