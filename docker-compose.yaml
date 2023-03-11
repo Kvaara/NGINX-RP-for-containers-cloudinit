@@ -34,50 +34,50 @@ services:
   #     - gitlab_logs:/var/log/gitlab
   #     - gitlab_data:/var/opt/gitlab
 
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins
-    restart: always
-    # hostname: dev.codebased.fi
-    environment:
-      - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
-      #- JENKINS_OPTS="--httpPort=-1 --httpsPort=8443" #--httpsCertificate=/etc/letsencrypt/live/dev.codebased.fi/fullchain.pem --httpsPrivateKey=/etc/letsencrypt/live/dev.codebased.fi/privkey.pem"
-      # - JENKINS_OPTS="--prefix=/jenkins" # NEEDED FOR GETTING THE PREFIX CORRECTLY WORKING WITH NGINX REVERSE PROXY
-    ports:
-      - "8080:8080"
-    volumes:
-      - jenkins_data:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-
-  # sonarqube:
-  #   image: sonarqube:community
-  #   container_name: sonarqube
-  #   depends_on:
-  #     - db
+  # jenkins:
+  #   image: jenkins/jenkins:lts
+  #   container_name: jenkins
   #   restart: always
+  #   # hostname: dev.codebased.fi
   #   environment:
-  #     - SONAR_JDBC_URL=jdbc:postgresql://db:5432/sonar
-  #     - SONAR_JDBC_USERNAME=sonar
-  #     - SONAR_JDBC_PASSWORD=sonar
-  #     - SONAR_WEB_CONTEXT=/sonarqube
+  #     - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
+  #     #- JENKINS_OPTS="--httpPort=-1 --httpsPort=8443" #--httpsCertificate=/etc/letsencrypt/live/dev.codebased.fi/fullchain.pem --httpsPrivateKey=/etc/letsencrypt/live/dev.codebased.fi/privkey.pem"
+  #     # - JENKINS_OPTS="--prefix=/jenkins" # NEEDED FOR GETTING THE PREFIX CORRECTLY WORKING WITH NGINX REVERSE PROXY
   #   ports:
-  #     - "9000:9000"
+  #     - "8080:8080"
   #   volumes:
-  #     - sonarqube_data:/opt/sonarqube/data
-  #     - sonarqube_extensions:/opt/sonarqube/extensions
-  #     - sonarqube_logs:/opt/sonarqube/logs
+  #     - jenkins_data:/var/jenkins_home
+  #     - /var/run/docker.sock:/var/run/docker.sock
 
-  # db:
-  #   image: postgres:latest
-  #   container_name: db
-  #   restart: always
-  #   environment:
-  #     POSTGRES_USER: sonar
-  #     POSTGRES_PASSWORD: sonar
-  #     POSTGRES_DB: sonar
-  #   volumes:
-  #     - postgresql_data:/var/lib/postgresql/data
-  #     - postgresql:/var/lib/postgresql
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
+    depends_on:
+      - db
+    restart: always
+    environment:
+      - SONAR_JDBC_URL=jdbc:postgresql://db:5432/sonar
+      - SONAR_JDBC_USERNAME=sonar
+      - SONAR_JDBC_PASSWORD=sonar
+      # - SONAR_WEB_CONTEXT=/sonarqube
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+      - postgresql:/var/lib/postgresql
 
 
   nginx:
@@ -86,7 +86,7 @@ services:
     container_name: nginx_lb
     # hostname: dev.codebased.fi
     depends_on:
-      - jenkins
+      - sonarqube
       - certbot
     restart: always
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
