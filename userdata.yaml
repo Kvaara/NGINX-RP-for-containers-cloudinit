@@ -12,9 +12,9 @@ runcmd:
  - cd /run/
  - git clone https://github.com/Kvaara/NGINX-RP-for-containers-cloudinit.git
  - cd ./NGINX-RP-for-containers-cloudinit
- - chmod +x init-letsencrypt.sh
- - ./init-letsencrypt.sh
- - docker compose up -d
+ - sudo chmod +x init-letsencrypt.sh
+ - sudo ./init-letsencrypt.sh
+ - docker compose up
 #  - apt install snapd
 #  - snap install core
 #  - snap refresh core
