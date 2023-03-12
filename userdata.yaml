@@ -14,3 +14,4 @@ runcmd:
  - chmod +x init-letsencrypt.sh
  - [ bash, ./init-letsencrypt.sh ] # ./init-letsencrypt.sh (DOES NOT WORK BECAUSE OF NO PRIVILEGES? DUNNO WHY)
  - docker compose up
+ - docker cp ./data/nginx/nginx.conf nginx:/etc/nginx/conf.d
