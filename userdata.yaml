@@ -8,7 +8,7 @@ bootcmd:
  - ulimit -n 131072 
  - ulimit -u 8192 
 runcmd: 
- - cd /run/
+ - cd /home/
  - git clone https://github.com/Kvaara/NGINX-RP-for-containers-cloudinit.git
  - cd ./NGINX-RP-for-containers-cloudinit
  - chmod +x init-letsencrypt.sh
